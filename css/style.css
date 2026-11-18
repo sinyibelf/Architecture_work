@@ -66,6 +66,7 @@ a.block:hover { border-color: var(--accent); }
   text-decoration: none;
 }
 .btn:hover { background: var(--tag-bg); }
+.btn[aria-pressed="true"] { background: var(--text); color: var(--block-bg); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* ----- 태그 ----- */

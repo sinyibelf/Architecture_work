@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>페르소나 목록 - 페르소나 자기소개</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="site-header" class="site-header"></header>
+
+  <main class="container">
+    <h1>페르소나 목록</h1>
+
+    <!-- 태그 필터 버튼 -->
+    <div id="tag-filter"></div>
+
+    <!-- 페르소나 카드 -->
+    <div id="persona-list" class="grid" style="margin-top:16px"></div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>renderPersonaList();</script>
+</body>
+</html>

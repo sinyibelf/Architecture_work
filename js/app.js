@@ -90,4 +90,23 @@ function renderAbout() {
   document.getElementById("about-dislikes").innerHTML = tagsHtml(profile.dislikes);
 }
 
+// S03 페르소나 목록 (태그 필터)
+function renderPersonaList(selectedTag = "전체") {
+  // 모든 페르소나의 태그를 중복 없이 모음
+  const allTags = ["전체", ...new Set(personas.flatMap((p) => p.tags))];
+
+  document.getElementById("tag-filter").innerHTML = allTags
+    .map((t) => `<button class="btn" ${t === selectedTag ? 'aria-pressed="true"' : ""} data-tag="${t}">${t}</button>`)
+    .join(" ");
+
+  const shown = selectedTag === "전체" ? personas : personas.filter((p) => p.tags.includes(selectedTag));
+  document.getElementById("persona-list").innerHTML =
+    shown.map(personaCardHtml).join("") || '<p class="empty">해당 태그의 페르소나가 없습니다</p>';
+
+  // 버튼 클릭 시 해당 태그로 다시 그리기
+  document.querySelectorAll("#tag-filter button").forEach((btn) => {
+    btn.onclick = () => renderPersonaList(btn.dataset.tag);
+  });
+}
+
 renderLayout();
