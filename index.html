@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home - 페르소나 자기소개</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="site-header" class="site-header"></header>
+
+  <main class="container">
+    <!-- 한 줄 소개 + 대표 이미지 -->
+    <section class="hero">
+      <h1 id="home-intro"></h1>
+      <img id="home-image" alt="대표 이미지">
+    </section>
+
+    <!-- 페르소나 바로가기 -->
+    <h2>페르소나 바로가기</h2>
+    <div id="home-personas" class="grid"></div>
+
+    <!-- 최근 경험 기록 3개 -->
+    <h2>최근 경험 기록</h2>
+    <div id="home-recent" class="grid"></div>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>renderHome();</script>
+</body>
+</html>
