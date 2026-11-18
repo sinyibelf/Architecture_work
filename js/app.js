@@ -42,7 +42,6 @@ function renderLayout() {
         ${links.map(([href, label]) => `<a href="${href}">${label}</a>`).join("")}
       </nav>
     </div>`;
-  document.getElementById("site-footer").textContent = "클라우드데이터베이스 과제";
 }
 
 // --- 카드 HTML 만들기 (여러 페이지에서 재사용) ---
@@ -79,6 +78,16 @@ function renderHome() {
   document.getElementById("home-personas").innerHTML = personas.map(personaCardHtml).join("");
   document.getElementById("home-recent").innerHTML =
     sortByLatest(experiences).slice(0, 3).map(experienceCardHtml).join("");
+}
+
+// S02 소개
+function renderAbout() {
+  document.getElementById("about-image").src = profile.image;
+  document.getElementById("about-name").textContent = profile.name;
+  document.getElementById("about-affiliation").textContent = profile.affiliation;
+  document.getElementById("about-intro").textContent = profile.intro;
+  document.getElementById("about-likes").innerHTML = tagsHtml(profile.likes);
+  document.getElementById("about-dislikes").innerHTML = tagsHtml(profile.dislikes);
 }
 
 renderLayout();

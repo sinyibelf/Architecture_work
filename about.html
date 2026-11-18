@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>소개 - 페르소나 자기소개</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="site-header" class="site-header"></header>
+
+  <main class="container">
+    <h1>소개</h1>
+
+    <!-- 프로필: 이미지, 이름, 소속, 한 줄 소개 -->
+    <section class="block profile">
+      <img id="about-image" alt="프로필 이미지">
+      <div class="profile-info">
+        <h2 id="about-name" style="margin-top:0"></h2>
+        <p id="about-affiliation" class="meta"></p>
+        <p id="about-intro"></p>
+      </div>
+    </section>
+
+    <!-- 관심 키워드 -->
+    <h2>관심 키워드</h2>
+    <div class="grid">
+      <section class="block">
+        <h3>선호</h3>
+        <div id="about-likes"></div>
+      </section>
+      <section class="block">
+        <h3>불호</h3>
+        <div id="about-dislikes"></div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>renderAbout();</script>
+</body>
+</html>

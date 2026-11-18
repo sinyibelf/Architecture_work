@@ -39,7 +39,6 @@ a  { color: inherit; }
 .site-logo { font-weight: bold; font-size: 1.2rem; text-decoration: none; }
 .site-nav a { margin-left: 16px; text-decoration: none; }
 .site-nav a:hover { color: var(--accent); }
-.site-footer { text-align: center; color: var(--text-sub); font-size: 0.85rem; padding: 24px 16px; }
 
 /* ----- 블록(카드) ----- */
 .block {
@@ -94,6 +93,11 @@ input, select, textarea {
   border: 2px solid var(--border);
   border-radius: var(--radius);
 }
+
+/* ----- S02 소개 ----- */
+.profile { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+.profile img { width: 200px; height: 200px; object-fit: cover; border: 2px solid var(--border); border-radius: var(--radius); background: var(--tag-bg); }
+.profile-info { flex: 1; min-width: 240px; }
 
 /* ----- S01 Home ----- */
 .hero { text-align: center; }
