@@ -109,4 +109,40 @@ function renderPersonaList(selectedTag = "전체") {
   });
 }
 
+// S04 페르소나 상세 (정렬: 최신순/공감순, 처음 5개 -> 더보기 시 10개)
+function renderPersonaDetail(sortBy = "latest", limit = 5) {
+  const persona = findPersona(getParam("id"));
+  if (!persona) {
+    document.getElementById("persona-detail").innerHTML = '<p class="empty">존재하지 않는 페르소나입니다</p>';
+    return;
+  }
+
+  document.getElementById("persona-detail").innerHTML = `
+    <h1>${persona.name}</h1>
+    <p>${persona.description}</p>
+    <div>${tagsHtml(persona.tags)}</div>
+    <p class="meta">생성일 ${persona.createdAt}</p>`;
+
+  // 이 페르소나의 경험 기록만 정렬 (공감순 동률이면 최신순)
+  const list = sortByLatest(experiences.filter((e) => e.personaId === persona.id));
+  if (sortBy === "likes") list.sort((a, b) => b.likes - a.likes); // sort는 안정 정렬이라 동률은 최신순 유지
+
+  const shown = list.slice(0, limit);
+  document.getElementById("experience-list").innerHTML =
+    shown.map(experienceCardHtml).join("") || '<p class="empty">아직 등록된 경험 기록이 없습니다</p>';
+
+  // 정렬 버튼 (현재 선택 강조)
+  document.getElementById("sort-buttons").innerHTML = `
+    <button class="btn" data-sort="latest" ${sortBy === "latest" ? 'aria-pressed="true"' : ""}>최신순</button>
+    <button class="btn" data-sort="likes" ${sortBy === "likes" ? 'aria-pressed="true"' : ""}>공감순</button>`;
+  document.querySelectorAll("#sort-buttons button").forEach((btn) => {
+    btn.onclick = () => renderPersonaDetail(btn.dataset.sort, 5); // 정렬 바꾸면 처음 5개부터
+  });
+
+  // 더보기 버튼 (5개만 보이는 상태에서 더 있을 때만 표시)
+  const moreBtn = document.getElementById("more-btn");
+  moreBtn.hidden = !(limit === 5 && list.length > 5);
+  moreBtn.onclick = () => renderPersonaDetail(sortBy, 10);
+}
+
 renderLayout();
