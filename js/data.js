@@ -50,8 +50,8 @@ const experiences = [
     situation: "상황: 어떤 상황이었는지 적으세요",
     attempt: "시도: 무엇을 해봤는지 적으세요",
     result: "결과: 어떻게 되었는지 적으세요",
-    likes: 3,    // 공감 수
-    views: 20,   // 조회수
+    likes: 0,    // 공감 수
+    views: 0,   // 조회수
   },
   {
     id: "e2",
@@ -63,8 +63,8 @@ const experiences = [
     situation: "상황을 적으세요",
     attempt: "시도를 적으세요",
     result: "결과를 적으세요",
-    likes: 5,
-    views: 35,
+    likes: 0,
+    views: 0,
   },
   {
     id: "e3",
@@ -76,8 +76,8 @@ const experiences = [
     situation: "상황을 적으세요",
     attempt: "시도를 적으세요",
     result: "결과를 적으세요",
-    likes: 2,
-    views: 15,
+    likes: 0,
+    views: 0,
   },
   {
     id: "e4",
@@ -89,8 +89,8 @@ const experiences = [
     situation: "상황을 적으세요",
     attempt: "시도를 적으세요",
     result: "결과를 적으세요",
-    likes: 7,
-    views: 50,
+    likes: 0,
+    views: 0,
   },
   {
     id: "e5",
@@ -102,8 +102,8 @@ const experiences = [
     situation: "상황을 적으세요",
     attempt: "시도를 적으세요",
     result: "결과를 적으세요",
-    likes: 4,
-    views: 28,
+    likes: 0,
+    views: 0,
   },
   {
     id: "e6",
@@ -115,8 +115,8 @@ const experiences = [
     situation: "상황을 적으세요",
     attempt: "시도를 적으세요",
     result: "결과를 적으세요",
-    likes: 6,
-    views: 40,
+    likes: 0,
+    views: 0,
   },
 ];
 

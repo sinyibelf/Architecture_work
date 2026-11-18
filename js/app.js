@@ -145,4 +145,43 @@ function renderPersonaDetail(sortBy = "latest", limit = 5) {
   moreBtn.onclick = () => renderPersonaDetail(sortBy, 10);
 }
 
+// S05 경험기록 상세 (공감은 브라우저당 기록 1개에 1회, 다시 누르면 취소: localStorage에 저장)
+function renderExperienceDetail() {
+  const e = experiences.find((x) => x.id === getParam("id"));
+  if (!e) {
+    document.getElementById("experience-detail").innerHTML = '<p class="empty">존재하지 않는 경험 기록입니다</p>';
+    return;
+  }
+  const persona = findPersona(e.personaId);
+  const likeKey = "liked_" + e.id;
+
+  // 이 단계는 서버가 없으므로 공감 수 = 더미 데이터 값 + (내가 눌렀으면 1)
+  function draw() {
+    const liked = localStorage.getItem(likeKey) === "1";
+    document.getElementById("experience-detail").innerHTML = `
+      <h1>${e.title}</h1>
+      <p class="meta">
+        <a href="persona.html?id=${e.personaId}">${persona ? persona.name : ""}</a>
+        / 생성일 ${e.createdAt} / 경험 기간 ${e.period}
+      </p>
+      <div>${tagsHtml(e.tags)}</div>
+
+      <section class="block"><h3>상황</h3><p>${e.situation}</p></section>
+      <section class="block" style="margin-top:16px"><h3>시도</h3><p>${e.attempt}</p></section>
+      <section class="block" style="margin-top:16px"><h3>결과</h3><p>${e.result}</p></section>
+
+      <p class="meta" style="margin-top:16px">공감 ${e.likes + (liked ? 1 : 0)} / 조회 ${e.views}</p>
+      <button id="like-btn" class="btn" ${liked ? 'aria-pressed="true"' : ""}>
+        ${liked ? "공감 취소" : "공감하기"}
+      </button>`;
+    // 누를 때마다 공감 <-> 취소 전환
+    document.getElementById("like-btn").onclick = () => {
+      if (liked) localStorage.removeItem(likeKey);
+      else localStorage.setItem(likeKey, "1");
+      draw();
+    };
+  }
+  draw();
+}
+
 renderLayout();
