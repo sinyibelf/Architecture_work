@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>질문함 - 페르소나 자기소개</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="site-header" class="site-header"></header>
+
+  <main class="container">
+    <h1>질문함</h1>
+
+    <!-- 질문 작성 -->
+    <h2>질문 남기기</h2>
+    <form id="q-form" class="block">
+      <label for="q-nickname">닉네임 (2~20자)</label>
+      <input id="q-nickname" type="text" maxlength="20">
+
+      <label for="q-persona">페르소나</label>
+      <select id="q-persona"></select>
+
+      <label for="q-content">내용 (10~500자)</label>
+      <textarea id="q-content" rows="5" maxlength="500"></textarea>
+
+      <p id="q-message" class="meta" style="margin-top:12px"></p>
+      <button type="submit" class="btn">질문 등록</button>
+    </form>
+
+    <!-- 답변완료 질문/답변 -->
+    <h2>답변완료 질문</h2>
+    <div id="q-list"></div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>renderQuestions();</script>
+</body>
+</html>

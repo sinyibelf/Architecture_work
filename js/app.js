@@ -184,4 +184,43 @@ function renderExperienceDetail() {
   draw();
 }
 
+// S06 질문함
+function renderQuestions() {
+  // 페르소나 선택지
+  document.getElementById("q-persona").innerHTML =
+    '<option value="">선택하세요</option>' +
+    personas.map((p) => `<option value="${p.id}">${p.name}</option>`).join("");
+
+  // 답변완료 질문만 최신순으로 공개
+  const answered = sortByLatest(questions.filter((q) => q.status === "답변완료"));
+  document.getElementById("q-list").innerHTML =
+    answered
+      .map((q) => {
+        const persona = findPersona(q.personaId);
+        return `
+          <section class="block" style="margin-bottom:16px">
+            <p class="meta">${q.nickname} / ${persona ? persona.name : ""} / ${q.createdAt}</p>
+            <p><b>Q.</b> ${q.content}</p>
+            <p><b>A.</b> ${q.answer}</p>
+          </section>`;
+      })
+      .join("") || '<p class="empty">아직 답변완료된 질문이 없습니다</p>';
+
+  // 작성 폼 제출: 검증만 하고, 저장은 다음 주차(AppSync/DynamoDB)에 구현
+  document.getElementById("q-form").onsubmit = (ev) => {
+    ev.preventDefault();
+    const nickname = document.getElementById("q-nickname").value.trim();
+    const personaId = document.getElementById("q-persona").value;
+    const content = document.getElementById("q-content").value.trim(); // 공백만 입력 방지
+    const msg = document.getElementById("q-message");
+
+    if (nickname.length < 2 || nickname.length > 20) return (msg.textContent = "닉네임은 2~20자로 입력해주세요");
+    if (!personaId) return (msg.textContent = "페르소나를 선택해주세요");
+    if (content.length < 10 || content.length > 500) return (msg.textContent = "내용은 10~500자로 입력해주세요");
+
+    msg.textContent = "질문이 등록되었습니다 (이번 주는 저장되지 않는 화면 틀입니다)";
+    ev.target.reset();
+  };
+}
+
 renderLayout();
