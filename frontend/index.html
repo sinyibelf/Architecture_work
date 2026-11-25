@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>리뷰로 찾는 게임</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <button id="btn-filter" class="btn btn-ghost only-mobile" aria-controls="filters" aria-expanded="false">필터</button>
+    <h1 class="brand">리뷰로 찾는 게임</h1>
+    <div class="header-actions">
+      <button id="btn-panel" class="btn" aria-controls="panel" aria-expanded="false">근거 리뷰</button>
+      <button id="btn-health" class="btn">서버 확인</button>
+    </div>
+  </header>
+
+  <div class="main">
+    <aside id="filters" class="filters" aria-label="필터">
+      <div class="filters-body">
+      <div class="filters-head">
+        <h2>필터</h2>
+        <button id="btn-filter-fold" class="btn btn-icon only-desktop" aria-controls="filters" aria-expanded="true" aria-label="필터 접기/펴기"><span aria-hidden="true">◀</span></button>
+        <button id="btn-filter-close" class="btn btn-icon only-mobile" aria-label="필터 닫기">✕</button>
+      </div>
+
+      <div class="field">
+        <label for="price-select">가격대</label>
+        <select id="price-select"></select>
+        <div id="price-custom" class="price-custom" hidden>
+          <input id="price-min" type="number" min="0" step="1000" inputmode="numeric" placeholder="최소(원)" aria-label="최소 가격">
+          <span aria-hidden="true">~</span>
+          <input id="price-max" type="number" min="0" step="1000" inputmode="numeric" placeholder="최대(원)" aria-label="최대 가격">
+        </div>
+        <p id="price-warn" class="warn" role="alert" hidden>최소 가격이 최대 가격보다 커요. 값을 확인해 주세요.</p>
+      </div>
+
+      <div class="field">
+        <label for="genre-input">장르</label>
+        <div class="combo">
+          <input id="genre-input" type="text" autocomplete="off" placeholder="검색 또는 입력 후 Enter"
+                 role="combobox" aria-expanded="false" aria-controls="genre-list">
+          <ul id="genre-list" class="combo-list" role="listbox" hidden></ul>
+        </div>
+        <div id="genre-chips" class="chips"></div>
+      </div>
+
+      <div class="field row">
+        <label for="korean-only">한국어 지원 게임만</label>
+        <input id="korean-only" class="switch" type="checkbox" role="switch">
+      </div>
+
+      <button id="btn-reset" class="btn btn-block">조건 초기화</button>
+      </div>
+    </aside>
+
+    <main class="chat">
+      <div id="scroll" class="scroll">
+        <div id="applied" class="applied" aria-live="polite"></div>
+        <section id="welcome" class="welcome"></section>
+        <div id="messages" class="messages" aria-live="polite"></div>
+      </div>
+      <div class="composer">
+        <div id="suggest" class="chips suggest"></div>
+        <form id="form" class="form">
+          <textarea id="input" rows="1" placeholder="어떤 게임을 찾고 있나요? (Enter 전송, Shift+Enter 줄바꿈)" aria-label="질문 입력"></textarea>
+          <button id="btn-send" class="btn btn-primary" type="submit">전송</button>
+        </form>
+      </div>
+    </main>
+
+    <aside id="panel" class="panel" aria-label="근거 리뷰" hidden>
+      <div class="panel-head">
+        <h2>근거 리뷰</h2>
+        <button id="btn-panel-close" class="btn btn-icon" aria-label="근거 리뷰 닫기">✕</button>
+      </div>
+      <div id="panel-body" class="panel-body"></div>
+    </aside>
+  </div>
+
+  <div id="scrim" class="scrim" hidden></div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
