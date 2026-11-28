@@ -1,4 +1,5 @@
 :root {
+  color-scheme: dark;  
   --bg: #171A21;
   --surface: #1B2838;
   --surface-2: #2A475E;
@@ -155,3 +156,13 @@ button.chip:hover { background: var(--surface-2); }
   .msg { max-width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* 스크롤바: 모든 스크롤 영역 공통 */
+* { scrollbar-width: thin; scrollbar-color: var(--surface-2) transparent; }
+*:hover { scrollbar-color: var(--accent) transparent; }
+@supports not (scrollbar-color: auto) {   /* scrollbar-color를 모르는 구형 브라우저용 */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 8px; border: 2px solid var(--bg); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+}
