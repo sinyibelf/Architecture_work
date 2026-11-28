@@ -159,7 +159,8 @@ function bindFilters() {
       e.preventDefault();
       const v = gi.value.trim();
       const hit = GENRES.find((g) => g.toLowerCase() === v.toLowerCase());
-      addGenre(hit || v);
+      if (hit) addGenre(hit);
+      else if (v) toast("목록에 있는 장르만 선택할 수 있어요.");
     }
   });
 }
