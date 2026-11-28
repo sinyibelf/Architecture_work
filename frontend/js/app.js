@@ -404,10 +404,59 @@ function renderReview(r) {
     extLink(r.reviewUrl, "리뷰 원문"),
   ].filter(Boolean));
 }
+// ===== 근거 리뷰 창 너비 조절 =====
+const PANEL_MIN = 300;
+const panelMax = () => Math.max(PANEL_MIN, Math.min(900, window.innerWidth - 360)); // 채팅 영역 최소 360px 확보
+
+function setPanelWidth(w, save = true) {
+  const width = Math.round(Math.min(panelMax(), Math.max(PANEL_MIN, w)));
+  document.documentElement.style.setProperty("--panel-w", `${width}px`);
+  $("panel-resizer").setAttribute("aria-valuenow", String(width));
+  if (save) {
+    try { localStorage.setItem("panelWidth", String(width)); } catch (_) { /* 저장 불가 환경은 무시 */ }
+  }
+}
+
+function bindPanelResize() {
+  const handle = $("panel-resizer");
+  try {
+    const saved = Number(localStorage.getItem("panelWidth"));
+    if (saved) setPanelWidth(saved, false);
+  } catch (_) { /* 저장값 없음 */ }
+
+  handle.addEventListener("pointerdown", (e) => {
+    if (isMobile()) return;
+    e.preventDefault();
+    handle.setPointerCapture(e.pointerId);
+    document.body.classList.add("resizing");
+    const move = (ev) => setPanelWidth(window.innerWidth - ev.clientX, false); // 패널이 오른쪽 끝이라 화면 너비 - 마우스 위치
+    const up = (ev) => {
+      handle.releasePointerCapture(ev.pointerId);
+      handle.removeEventListener("pointermove", move);
+      handle.removeEventListener("pointerup", up);
+      document.body.classList.remove("resizing");
+      setPanelWidth(window.innerWidth - ev.clientX); // 놓을 때만 저장
+    };
+    handle.addEventListener("pointermove", move);
+    handle.addEventListener("pointerup", up);
+  });
+
+  handle.addEventListener("dblclick", () => setPanelWidth(380)); // 더블클릭: 기본 너비로
+  handle.addEventListener("keydown", (e) => {                   // 키보드 접근성
+    const cur = $("panel").getBoundingClientRect().width;
+    if (e.key === "ArrowLeft") { e.preventDefault(); setPanelWidth(cur + 20); }
+    if (e.key === "ArrowRight") { e.preventDefault(); setPanelWidth(cur - 20); }
+  });
+  window.addEventListener("resize", () => { // 창을 줄이면 최대 너비 안으로 다시 맞춤
+    const cur = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--panel-w")) || 380;
+    if (cur > panelMax()) setPanelWidth(panelMax(), false);
+  });
+}
 
 // ===== 초기화 =====
 function init() {
   bindFilters();
+  bindPanelResize();
   renderFilters();
   renderWelcome();
 
