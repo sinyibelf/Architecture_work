@@ -1,7 +1,7 @@
 // 설정값
-const API_BASE_URL = "";   // 예: "https://api.example.com" (끝에 / 없이)
-const USE_MOCK = true;     // false로 바꾸면 실제 서버를 호출한다
-const REQUEST_TIMEOUT_MS = 15000;
+const API_BASE_URL = "https://94efny5s0c.execute-api.ap-northeast-2.amazonaws.com";
+const USE_MOCK = false;
+const REQUEST_TIMEOUT_MS = 25000;
 
 // 첫 화면 제목 문구
 const TITLES = [
